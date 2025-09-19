@@ -1,18 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Fetch } from "@/lib/fetch";
-import Image from "next/image";
+import { Fetch } from '@/lib/fetch';
 
 export default async function Page() {
+  const response = await Fetch({ endpoint: 'chapters' });
 
-const response = await Fetch({endpoint: "chapters"})
+  console.log(response.data);
 
-console.log( await response.data)
-
-  return (
-    <div>
-     asdasd
-    </div>
-
-
-  );
+  return <div>asdasd</div>;
 }
