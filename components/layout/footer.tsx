@@ -14,9 +14,6 @@ const Footer = () => {
           <Button variant={'link'}>
             <Link href="/contact">{'Contact'}</Link>
           </Button>
-          <Button variant={'link'}>
-            <Link href="/privacy">{'Privacy'}</Link>
-          </Button>
         </div>
       </div>
     </footer>
