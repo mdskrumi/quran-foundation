@@ -93,7 +93,7 @@ export default function RandomVerseComponent() {
   };
 
   return (
-    <div className="flex h-full min-h-screen flex-col items-center justify-center">
+    <div className="flex h-full flex-col items-center justify-center">
       <Card className="mx-auto w-full">
         <CardHeader className="space-y-4">
           <div className="mb-7 flex items-center justify-between">
