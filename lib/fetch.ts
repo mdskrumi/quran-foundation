@@ -7,7 +7,7 @@ export const Fetch = async ({
   headers,
   body,
   tags = [],
-  revalidate = 0
+  revalidate = 0,
 }: {
   baseUrl?: string;
   endpoint: string;
@@ -17,7 +17,6 @@ export const Fetch = async ({
   tags?: string[];
   revalidate?: number;
 }): Promise<{ status: number; data: any } | never> => {
-  
   if (!baseUrl) {
     throw new Error('BASE_URL environment variable is required');
   }
@@ -27,12 +26,13 @@ export const Fetch = async ({
   }
 
   let authHeaders: HeadersInit = {};
-  
+
   // Always get auth token since you mentioned auth is always required
   try {
     const tokenManager = TokenManager.getInstance();
     const token = await tokenManager.getToken();
     const clientId = process.env.CLIENT_ID!;
+
     authHeaders = {
       'x-auth-token': token,
       'x-client-id': clientId,
@@ -48,40 +48,40 @@ export const Fetch = async ({
       headers: {
         'Content-Type': 'application/json',
         ...authHeaders,
-        ...headers
+        ...headers,
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
       next: {
         tags,
-        revalidate
-      }
+        revalidate,
+      },
     });
 
     // Handle 401 Unauthorized - token might be expired, retry with fresh token
     if (result.status === 401) {
       const tokenManager = TokenManager.getInstance();
       tokenManager.clearToken();
-      
+
       // Retry once with fresh token
       const newToken = await tokenManager.getToken();
       const retryResult = await fetch(`${baseUrl}${endpoint}`, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${newToken}`,
-          ...headers
+          Authorization: `Bearer ${newToken}`,
+          ...headers,
         },
         ...(body ? { body: JSON.stringify(body) } : {}),
         next: {
           tags,
-          revalidate
-        }
+          revalidate,
+        },
       });
 
       const retryData = await retryResult.json();
       return {
         status: retryResult.status,
-        data: retryData
+        data: retryData,
       };
     }
 
@@ -89,11 +89,11 @@ export const Fetch = async ({
 
     return {
       status: result.status,
-      data
+      data,
     };
   } catch (error) {
     throw {
-      error: error
+      error: error,
     };
   }
 };

@@ -1,9 +1,9 @@
-import { Fetch } from '@/lib/fetch';
+import RandomVerse from '@/components/random-verse';
 
 export default async function Page() {
-  const response = await Fetch({ endpoint: 'chapters' });
-
-  console.log(response.data);
-
-  return <div>asdasd</div>;
+  return (
+    <div className="container mx-auto">
+      <RandomVerse />
+    </div>
+  );
 }
