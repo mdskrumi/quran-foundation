@@ -62,7 +62,7 @@ export default async function JuzPage({
         </Link>
       </div>
 
-      <div className="mb-6 flex items-center justify-end gap-3">
+      <div className="mb-6 flex flex-col items-center justify-end gap-3 sm:flex-row">
         {translationsData && translationsData?.translations && (
           <TranslateSelect translations={translations} options={translationsData.translations} />
         )}

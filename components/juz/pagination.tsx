@@ -33,7 +33,7 @@ export function PaginationControls({
         {Array.from({ length: pagination.total_pages }).map((_, i) => {
           const pageNum = i + 1;
           return (
-            <PaginationItem key={pageNum}>
+            <PaginationItem key={pageNum} className="hidden sm:block">
               <PaginationLink
                 href={`/juz/${id}?page=${pageNum}&script=${script}${translations ? `&translations=${translations}` : ''}`}
                 isActive={pageNum === pagination.current_page}
