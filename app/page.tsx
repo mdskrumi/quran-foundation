@@ -2,9 +2,10 @@ import Link from 'next/link';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Fetch } from '@/lib/fetch';
+import { daysToSeconds } from '@/lib/utils';
 
 export default async function Page() {
-  const { data } = await Fetch({ endpoint: 'juzs' });
+  const { data } = await Fetch({ endpoint: 'juzs', revalidate: daysToSeconds(7) });
 
   return (
     <div className="container mx-auto py-10">

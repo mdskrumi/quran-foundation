@@ -11,7 +11,6 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Fetch } from '@/lib/fetch';
 import { createQueryParams, daysToSeconds } from '@/lib/utils';
 
-// Juz Page
 export default async function JuzPage({
   params,
   searchParams,
@@ -41,7 +40,7 @@ export default async function JuzPage({
 
   const {
     data: { verses, pagination },
-  } = await Fetch({ endpoint: `verses/by_juz/${juzId}?${createQueryParams(queryParam)}` });
+  } = await Fetch({ endpoint: `verses/by_juz/${juzId}?${createQueryParams(queryParam)}`, revalidate: daysToSeconds(7) });
   const { data: translationsData } = await Fetch({ endpoint: `/resources/translations`, revalidate: daysToSeconds(7) });
 
   return (
